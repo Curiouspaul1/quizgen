@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizPage- {{result[0]['category']}}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="heading">
+            <h1>
+                Category: {{result[0]['category']}}
+            </h1>
+        </div>
+        <div class="quiz-section">
+            {% for item in result %}
+                <div class="quizitem">
+                    {{item.quiz_body}}
+                    <div class="quiz-options">
+                        <input type="radio" id="A">
+                        <label for="A">A. {{item.A}}</label><br>
+                        <input type="radio" id="B">
+                        <label for="B">B. {{item.B}}</label><br>
+                        <input type="radio" id="C">
+                        <label for="C">C. {{item.C}}</label><br>
+                        <input type="radio" id="D">
+                        <label for="D">D. {{item.D}}</label><br>
+                    </div>
+                    <div class="quiz-info">
+                        <span><h3>Ans: {{item.answer}}</h3></span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="transit-pages">
+            <form action="{{url_for('get_quiz_by_category')}}" method="POST">
+               <button type="submit" name="next" class="transit-btn">Next>></button>
+               <button type="submit" name="prev" class="transit-btn">Prev<<</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

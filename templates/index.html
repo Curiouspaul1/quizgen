@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizGenerator</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="header-text">Quiz Generator</h1>
+        <p>
+            Welcome user, to begin pick from a list of categories to view the questions
+            we have in our archive.
+        </p>
+        <div class="categories">
+            <a href="{{url_for('get_quiz_by_category', category='science')}}">
+                <div id="science" class="catitem">
+                    <div class="imgdiv">
+                        <img src="../static/undraw_science_fqhl.svg" alt="">
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, expedita?
+                    </p>
+                </div>
+            </a>
+            <div id="art" class="catitem">
+                <div class="imgdiv">
+                    <img src="../static/undraw_art_museum_8or4.svg" alt="">
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, expedita?
+                </p>
+            </div>
+            <div id="entertainment" class="catitem">
+                <div class="imgdiv">
+                    <img src="../static/undraw_horror_movie_3988.svg" alt="">
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, expedita?
+                </p>
+            </div>
+
+            <div class="question">
+                {% for item in result %}
+                    <div>
+                        {{item.answer}}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="contribute">
+            <h2>Help grow this platform, by contributing to our archive</h2>
+            <form action="{{url_for('add_quiz')}}", method="POST">
+                <span>Pick a category</span>
+                <select name="category" id="" aria-placeholder="Pick a category">
+                    <option value="">--Please choose an option--</option>
+                    <option value="science">Science</option>
+                    <option value="art">Art</option>
+                    <option value="entertainment">Entertainment</option>
+                </select>
+                <div class="quiz-details">
+                    <h3>Give us the details</h3>
+                    <textarea name="quiz-body" id="" placeholder="Type in the question"></textarea>
+                    <div class="quiz-options">
+                        <input type="text" name="A" id="" placeholder="Option A">
+                        <input type="text" name="B" id="" placeholder="Option B">
+                        <input type="text" name="C" id="" placeholder="Option C">
+                        <input type="text" name="D" id="" placeholder="Option D">
+                        <br>
+                        <input type="text" name="ans" id="" placeholder="Tell us the answer">
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+<script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+</html>
