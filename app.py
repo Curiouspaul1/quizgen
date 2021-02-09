@@ -24,8 +24,8 @@ def index():
 @app.route("/addquiz", methods=['POST'])
 def add_quiz():
     _data = request.form
+    # search for category specified using index
     get_category = client.query(q.get(q.match(q.index('category_by_name'), _data['category'])))
-    print(get_category['data']['name'])
     new_quiz = client.query(
         q.create(q.collection('Quiz'), {
             "data":{
@@ -71,7 +71,6 @@ def get_quiz_by_category(category):
         return render_template('quizpage.html', result=result)
     elif request.method == 'POST':
         if 'next' in request.form.keys():
-            print(_vars['category_name'])
             get_category = client.query(q.get(q.match(q.index('category_by_name'), _vars['category_name'])))
             query = client.query(
                 q.map_(
@@ -87,10 +86,10 @@ def get_quiz_by_category(category):
                 )
             )
             result = [i['data'] for i in query['data']]
-            print(query)
             if 'before' in query.keys():
                 _vars['before'] = query['before'][0]
-            print(_vars)
+            if 'after' in query.keys():
+                _vars['after'] = query['after'][0]
             return render_template('quizpage.html', result=result)
         if 'prev' in request.form.keys():
             #print(_vars)
@@ -109,9 +108,10 @@ def get_quiz_by_category(category):
                 )
             )
             result = [i['data'] for i in query['data']]
-            print(query)
             if 'after' in query.keys():
                 _vars['after'] = query['after'][0]
+            if 'before' in query.keys():
+                _vars['before'] = query['before'][0]
             return render_template('quizpage.html', result=result)
 
 if __name__ == "__main__":

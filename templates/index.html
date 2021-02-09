@@ -26,30 +26,27 @@
                     </p>
                 </div>
             </a>
-            <div id="art" class="catitem">
-                <div class="imgdiv">
-                    <img src="../static/undraw_art_museum_8or4.svg" alt="">
-                </div>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, expedita?
-                </p>
-            </div>
-            <div id="entertainment" class="catitem">
-                <div class="imgdiv">
-                    <img src="../static/undraw_horror_movie_3988.svg" alt="">
-                </div>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, expedita?
-                </p>
-            </div>
-
-            <div class="question">
-                {% for item in result %}
-                    <div>
-                        {{item.answer}}
+            <a href="{{url_for('get_quiz_by_category', category='art')}}">
+                <div id="art" class="catitem">
+                    <div class="imgdiv">
+                        <img src="../static/undraw_art_museum_8or4.svg" alt="">
                     </div>
-                {% endfor %}
-            </div>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, expedita?
+                    </p>
+                </div>
+            </a>
+            
+            <a href="{{url_for('get_quiz_by_category', category='entertainment')}}">
+                <div id="entertainment" class="catitem">
+                    <div class="imgdiv">
+                        <img src="../static/undraw_horror_movie_3988.svg" alt="">
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, expedita?
+                    </p>
+                </div>
+            </a>
         </div>
 
         <div class="contribute">
