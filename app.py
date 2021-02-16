@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, session
+from flask import Flask, render_template, url_for, request
 from faunadb import query as q
 from faunadb.client import FaunaClient
 from dotenv import load_dotenv
