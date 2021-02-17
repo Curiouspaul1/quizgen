@@ -68,7 +68,11 @@ def get_quiz_by_category(category):
             _vars['after'] = query['after'][0]
         #print(_vars)
         print(query)
-        return render_template('quizpage.html', result=result)
+        if len(result) > 0:
+            return render_template('quizpage.html', result=result)
+        else:
+            result = [{'category' :f'{category}', "msg" :"Nothing here !"}]
+            return render_template('quizpage.html', result=result)
     elif request.method == 'POST':
         if 'next' in request.form.keys():
             get_category = client.query(q.get(q.match(q.index('category_by_name'), _vars['category_name'])))
@@ -90,7 +94,11 @@ def get_quiz_by_category(category):
                 _vars['before'] = query['before'][0]
             if 'after' in query.keys():
                 _vars['after'] = query['after'][0]
-            return render_template('quizpage.html', result=result)
+            if len(result) > 0:
+                return render_template('quizpage.html', result=result)
+            else:
+                result = [{'category' :f'{category}', "msg" :"Nothing here !"}]
+                return render_template('quizpage.html', result=result)
         if 'prev' in request.form.keys():
             #print(_vars)
             get_category = client.query(q.get(q.match(q.index('category_by_name'), _vars['category_name'])))
@@ -112,7 +120,11 @@ def get_quiz_by_category(category):
                 _vars['after'] = query['after'][0]
             if 'before' in query.keys():
                 _vars['before'] = query['before'][0]
-            return render_template('quizpage.html', result=result)
+            if len(result) > 0:
+                return render_template('quizpage.html', result=result)
+            else:
+                result = [{'category' :f'{category}', "msg" :"Nothing here !"}]
+                return render_template('quizpage.html', result=result)
 
 if __name__ == "__main__":
     app.run(debug=True)

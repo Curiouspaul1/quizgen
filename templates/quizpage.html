@@ -14,27 +14,32 @@
                 Category: {{result[0]['category']}}
             </h1>
         </div>
-        <div class="quiz-section">
-            {% for item in result %}
-                <div class="quizitem">
-                    {{item.quiz_body}}
-                    <div class="quiz-options">
-                        <input type="radio" id="A">
-                        <label for="A">A. {{item.A}}</label><br>
-                        <input type="radio" id="B">
-                        <label for="B">B. {{item.B}}</label><br>
-                        <input type="radio" id="C">
-                        <label for="C">C. {{item.C}}</label><br>
-                        <input type="radio" id="D">
-                        <label for="D">D. {{item.D}}</label><br>
+        {% if result|length == 1 %}
+            <div class="quiz-section">
+                <h2>{{result[0]['msg']}}</h2>
+            </div>
+        {% elif result|length >= 1 %}
+            <div class="quiz-section">
+                {% for item in result %}
+                    <div class="quizitem">
+                        {{item.quiz_body}}
+                        <div class="quiz-options">
+                            <input type="radio" id="A">
+                            <label for="A">A. {{item.A}}</label><br>
+                            <input type="radio" id="B">
+                            <label for="B">B. {{item.B}}</label><br>
+                            <input type="radio" id="C">
+                            <label for="C">C. {{item.C}}</label><br>
+                            <input type="radio" id="D">
+                            <label for="D">D. {{item.D}}</label><br>
+                        </div>
+                        <div class="quiz-info">
+                            <span><h3>Ans: {{item.answer}}</h3></span>
+                        </div>
                     </div>
-                    <div class="quiz-info">
-                        <span><h3>Ans: {{item.answer}}</h3></span>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="transit-pages">
             <form action="{{url_for('get_quiz_by_category')}}" method="POST">
                <button type="submit" name="next" class="transit-btn">Next>></button>
